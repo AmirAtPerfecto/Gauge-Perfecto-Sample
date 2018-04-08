@@ -96,9 +96,12 @@ public class PerfectoHelper {
         String reportURL = reportiumClient.getReportUrl();
         System.out.println(System.lineSeparator()+ "Report URL: "+ reportURL+ System.lineSeparator());
 
-        driver.close();
-        driver.quit();
-        driver = null;
+        // avoid exceptions
+        if (null != driver) {
+            driver.close();
+            driver.quit();
+            driver = null;
+        }
         reportiumClient = null;
         reportException = null;
 
