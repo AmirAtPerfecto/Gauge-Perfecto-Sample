@@ -5,7 +5,7 @@ this example demonstrates two specs running on Perfecto using remoteWebDriver.
 
 To simply run the project using default values:
 1. Open "env/default/defaul.properties" and set the values for
-PERFECTO_CLOUD (example: demo.perfectomobile.com) <br/>
+PERFECTO_CLOUD (example: demo.perfectomobile.com) <br>
 PERFECTO_USERNAME (example: dan@gogo.com)
 PERFECTO_SECURITY_TOKEN (taken from here: http://developers.perfectomobile.com/display/PD/Security+Token)
 
