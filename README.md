@@ -41,3 +41,8 @@ PerfectoHelper uses a static Exception variable to report if an error occured du
 
 PerfectoHelper is being used from DriverFactory utilities.
 
+# please note:
+
+1. It does not seem like Gauge supports parallel execution of environments easily. At least from IntelliJ you can only test on one browser in parallel. You can probably do concurrent multi browser executions from your CI tool.
+
+2. Although it seems like Gauge supports parallel execution of specs, in reality due to the static driver being shared, the tests will get confused and fail. This is really because there is not mapping between specs, Java classes and drivers. a spec can use more than one java class.
