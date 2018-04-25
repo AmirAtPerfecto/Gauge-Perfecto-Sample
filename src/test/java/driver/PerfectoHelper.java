@@ -6,6 +6,7 @@ import com.perfecto.reportium.model.Job;
 import com.perfecto.reportium.model.PerfectoExecutionContext;
 import com.perfecto.reportium.model.Project;
 import com.perfecto.reportium.test.result.TestResultFactory;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -21,8 +22,8 @@ public class PerfectoHelper {
     private static final String SECURITY_TOKEN = System.getenv("PERFECTO_SECURITY_TOKEN");
     private static final String remoteURL = "https://" + HOST + "/nexperience/perfectomobile/wd/hub/fast";
 
-    private static RemoteWebDriver driver;
-    private static ReportiumClient reportiumClient;
+    private static RemoteWebDriver driver ;
+    private static ReportiumClient reportiumClient ;
     private static Exception  reportException = null;
 
     public static RemoteWebDriver getDriver(){
@@ -47,19 +48,38 @@ public class PerfectoHelper {
 
     private static RemoteWebDriver createDriver(){
         try {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
+
+             DesiredCapabilities capabilities = null;
+            // Are we running on a mobile device?
+            if (null != System.getenv("TARGET_EXECUTION") && System.getenv("TARGET_EXECUTION").toLowerCase().equals("desktop")){
+                capabilities = new DesiredCapabilities();
+                setCapIfNotNull(capabilities, "browserName", "BROWSER");
+                setCapIfNotNull(capabilities, "browserVersion", "BROWSER_VERSION");
+                capabilities.setCapability("platformName", System.getenv("PLATFORM"));
+            }
+            else { // it's a mobile device
+                String browserName = "mobileOS";
+                capabilities = new DesiredCapabilities(browserName, "", Platform.ANY);
+                setCapIfNotNull(capabilities, "manufacturer", "MANUFACTURER");
+                setCapIfNotNull(capabilities, "model", "MODEL");
+                setCapIfNotNull(capabilities, "network", "NETWORK");
+                setCapIfNotNull(capabilities, "description", "DESCRIPTION");
+// You can select the specific device by ID for the test, although this is not a best practice: better to select a device by its OS, model, version etc.
+                setCapIfNotNull(capabilities, "deviceName","DEVICE_NAME");
+
+            }
+
 
             // Setup Perfecto Credentials
             capabilities.setCapability("user", USERNAME);
             capabilities.setCapability("securityToken", SECURITY_TOKEN);
 
-
-            capabilities.setCapability("platformName", System.getenv("PLATFORM"));
+            // platform details
             capabilities.setCapability("platformVersion", System.getenv("PLATFORM_VERSION"));
-            capabilities.setCapability("browserName", System.getenv("BROWSER"));
-            capabilities.setCapability("browserVersion", System.getenv("BROWSER_VERSION"));
-            capabilities.setCapability("resolution", System.getenv("RESOLUTION"));
-            capabilities.setCapability("location", System.getenv("LOCATION"));
+
+            setCapIfNotNull(capabilities, "location", "LOCATION");
+            setCapIfNotNull(capabilities, "resolution", "RESOLUTION");
+
             System.out.println(System.lineSeparator() + "caps: "+ capabilities.toString()+ System.lineSeparator());
 
 
@@ -75,7 +95,8 @@ public class PerfectoHelper {
 
             driver = new RemoteWebDriver(new URL(remoteURL), capabilities);
             driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-
+            if (null != System.getenv("TARGET_EXECUTION") && System.getenv("TARGET_EXECUTION").toLowerCase().equals("desktop"))
+                driver.manage().window().maximize();
         } catch (MalformedURLException e) {
 
             System.out.println(e.toString());
@@ -85,6 +106,11 @@ public class PerfectoHelper {
             System.out.println(e.toString());
         }
         return driver;
+
+    }
+    private static void setCapIfNotNull(DesiredCapabilities caps, String capName, String definitionName){
+        if (null != System.getenv(definitionName))
+            caps.setCapability(capName, System.getenv(definitionName));
     }
 
     public static void tearDown(){

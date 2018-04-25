@@ -2,7 +2,7 @@ import com.perfecto.reportium.test.TestContext;
 import com.thoughtworks.gauge.Step;
 import driver.DriverFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebElement;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,9 +30,17 @@ public class GoogleTest {
     @Step("Search for term <term>")
     public void searchFor(String term) {
         try {
-            WebElement element = DriverFactory.getDriver().findElement(By.name("q"));
+            RemoteWebElement element = (RemoteWebElement) DriverFactory.getDriver().findElement(By.name("q"));
+
+
             element.sendKeys(term);
-            element.submit();
+            // on mobile safari the element.submit() doesn't work
+            try {
+                RemoteWebElement searchButton = (RemoteWebElement)DriverFactory.getDriver().findElement(By.className("Tg7LZd"));
+                searchButton.click();
+            } catch (Exception e) {
+                element.submit();
+            }
         } catch (Exception e) {
             setTestResultFailed(e);
             e.printStackTrace();
