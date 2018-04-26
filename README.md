@@ -21,12 +21,58 @@ You will get the capabilities in the console, the execution details and then a l
 You can do the same for "example.spec" or even "specs" folder.
 In the latter case all specs will execute serially.
 
+
+
+# default environment definitions (env/default/default.properties)
+
+Here are the default settings for execution. Below are instructions to customize and use those.
+Please refer to http://developers.perfectomobile.com/display/PD/Supported+Appium+Capabilities for more insight
+
+TARGET_EXECUTION = desktop
+
+PLATFORM = Windows
+PLATFORM_VERSION = 10
+BROWSER = Chrome
+BROWSER_VERSION = latest
+RESOLUTION = 1280x1024
+LOCATION = US East
+
+## for mobile
+##TARGET_EXECUTION = mobile
+
+##PLATFORM = iOS
+##PLATFORM_VERSION= 10.2
+
+##MANUFACTURER = Apple
+##MODEL = iPhone-6
+
+##NETWORK = AT&T-United States of America
+##DESCRIPTION = Group A
+##RESOLUTION = 750 x 1334
+
 # change browser
 The default browser/OS settings is defined in "env/default/defaul.properties".
 
 If you want to override the browser selection, simply add a new folder in "env" and copy "env/chrome/browser.properties" and override just what you want (you don't need to rewrite all capabilities).
 
 Then, in the configuration (IntelliJ->Run->Edit configurations), in "environment" set the name of the folder.
+
+# change to a mobile device (for mobile web or native execution)
+Either in default.properties or in a new environment definition that you can define, set
+## for mobile
+TARGET_EXECUTION = mobile
+
+PLATFORM = iOS
+// the following are optional settings
+##PLATFORM_VERSION= 10.2
+
+##MANUFACTURER = Apple
+##MODEL = iPhone-6
+
+##NETWORK = AT&T-United States of America
+##DESCRIPTION = Group A
+##RESOLUTION = 750 x 1334
+
 
 # about PerfectoHelper
 Basically PerfectoHelper is a class of static RemoteWebDriver and its matching ReportiumClient.
