@@ -77,6 +77,14 @@ PLATFORM = iOS
 ##DESCRIPTION = Group A
 ##RESOLUTION = 750 x 1334
 
+# Added Applitools testing support
+Applitools offers complete page comparison in CI
+
+Added new steps to scan a page or scan a page with scroll:
+I check window "Google Tom Brady Search"
+I check complete window "Google Tom Brady Search"
+
+To activate, set APPLITOOS_KEY with your key in env/default/default.properties. If you don't have a key head to applitools.com to get one.
 
 # about PerfectoHelper
 Basically PerfectoHelper is a class of static RemoteWebDriver and its matching ReportiumClient.
