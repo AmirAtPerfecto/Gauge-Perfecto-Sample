@@ -21,7 +21,11 @@ You will get the capabilities in the console, the execution details and then a l
 You can do the same for "example.spec" or even "specs" folder.
 In the latter case all specs will execute serially.
 
-
+# examples
+You can execute the following samples:
+- GoogleTest.spec- web test (mobile/desktop)
+- example.spec- same
+- iOSCalculator- native iOS calculator test
 
 # default environment definitions (env/default/default.properties)
 

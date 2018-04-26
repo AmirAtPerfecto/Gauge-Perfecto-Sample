@@ -55,6 +55,8 @@ public class iOSCalculator {
             e.printStackTrace();
         }
     }
+
+    // ****==========  Specific perfecto utilities   =============****//
     //Launches application
     private static String launchApp(RemoteWebDriver driver, String app) {
         Map<String, Object> params = new HashMap<>();
