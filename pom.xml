@@ -57,6 +57,12 @@
             <artifactId>reportium-allure-integration</artifactId>
             <version>${reportium-sdk.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.applitools</groupId>
+            <artifactId>eyes-selenium-java3</artifactId>
+            <version>3.13</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

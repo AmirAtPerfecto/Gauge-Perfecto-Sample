@@ -9,6 +9,8 @@ To execute this specification, use `mvn test`
 Get Started
 -----------
 * Search for term "Tom Brady"
+* I check window "Google Tom Brady Search"
 * Make sure the page title is "Tom Brady - Google Search"
+* I check complete window "Tom Brady search result"
 
 

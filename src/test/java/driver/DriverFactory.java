@@ -11,6 +11,7 @@ public class DriverFactory {
     //@BeforeSuite
     public void setUp() {
         PerfectoHelper.setUp();
+        ApplitoolsHelper.setUp();
 
     }
 
@@ -18,6 +19,7 @@ public class DriverFactory {
     //@AfterSuite
     @AfterSpec
     public void tearDown() {
+        ApplitoolsHelper.tearDown();
         PerfectoHelper.tearDown();
     }
 
