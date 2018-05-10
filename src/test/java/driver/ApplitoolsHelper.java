@@ -1,6 +1,7 @@
 package driver;
 
 import com.applitools.eyes.TestResults;
+import com.applitools.eyes.exceptions.DiffsFoundException;
 import com.applitools.eyes.selenium.Eyes;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -44,16 +45,17 @@ public class ApplitoolsHelper {
     }
 
     private static void tearDownEyes(){
-        System.out.print(">>>>>> END <<<<<<<<<\n");
+        System.out.print(System.lineSeparator()+ ">>>>>> END <<<<<<<<<\n");
         if (null != eyes) {
             TestResults close = null;
             try {
                 close = eyes.close();
-            } catch (Exception e) {
+                System.out.println(">>>>>> Applitools report URL: "+ close.getUrl());
+            } catch (DiffsFoundException e) {
+                e.printStackTrace();
+            }catch (Exception e) {
                 e.printStackTrace();
             }
-            // Add validator
-            System.out.println(">>>>>> Applitools report URL: "+ close.getUrl());
         }
 
     }
