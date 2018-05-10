@@ -77,6 +77,34 @@ PLATFORM = iOS
 ##DESCRIPTION = Group A
 ##RESOLUTION = 750 x 1334
 
+# Added support for accessibility scan (based on AXE) for mobile and desktop web pages
+This project demonstrates how AXE (provided by Deque see [here](https://axe-core.org/docs/)) can be used to automate accessibility testing for any browser, desktop or mobile, with Quantum framework
+
+In the report you will find a new step called **"Then axe scans the web page"** , this is what causes the scan
+
+## Reading the Perfecto report
+Under the step "Then axe scans the web page", you will find a number of "Execute Script" and then the first comment.
+This comment will say **"Accessibility scan found 5 violations in 11 objects"**
+
+Then, there will be a loop detailing each object and a follow up of a screenshot highlighting each object:
+
+This is following the convention defined in the [AXE spec](https://axe-core.org/docs/#results-object)
+
+**Impact: critical**\
+**Rule ID: aria-required-children**\
+**Summary: Fix any of the following: Required ARIA children role not present: listbox textbox**\
+**Selector:	#lst-ib**\
+**HTML:		input class="gsfi" id="lst-ib" maxlength="2048" name="q" autocomplete="off" title="Search" type="text" value="quantum perfecto" aria-label="Search" aria-haspopup="false" role="combobox" aria-autocomplete="list" dir="ltr" spellcheck="false" style="border: none; padding: 0px; margin: 0px; height: auto; width: 100%; background: url(&quot;data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw%3D%3D&quot;) transparent; position: absolute; z-index: 6; left: 0px; outline: none;"**\
+**Help: Certain ARIA roles must contain particular children** \
+**HelpURL: https://dequeuniversity.com/rules/axe/2.3/aria-required-children?application=axeAPI** \
+**Tags: [cat.aria, wcag2a, wcag131]**
+
+## Customizations
+In the environment capabilities you can define failScriptOnAccessibilityErrors to true such that once a violation is found, their script will assert.
+
+Kudis to Chris Emerson for his help setting this up!
+
+
 # Added Applitools testing support
 Applitools offers complete page comparison in CI
 
