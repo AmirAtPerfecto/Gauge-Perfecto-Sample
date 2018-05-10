@@ -82,7 +82,7 @@ This project demonstrates how AXE (provided by Deque see [here](https://axe-core
 
 In the report you will find a new step called **"Then axe scans the web page"** , this is what causes the scan
 
-## Reading the Perfecto report
+## Reading the accessibility details in Perfecto report
 Under the step "Then axe scans the web page", you will find a number of "Execute Script" and then the first comment.
 This comment will say **"Accessibility scan found 5 violations in 11 objects"**
 
