@@ -20,8 +20,8 @@ public class PerfectoHelper {
     private static final String HOST = System.getenv("PERFECTO_CLOUD");
     private static final String USERNAME = System.getenv("PERFECTO_USERNAME");
     private static final String SECURITY_TOKEN = System.getenv("PERFECTO_SECURITY_TOKEN");
-   private static final String remoteURL = "https://" + HOST + "/nexperience/perfectomobile/wd/hub/fast";
-//    private static final String remoteURL = "https://" + HOST + "/nexperience/perfectomobile/wd/hub";
+//   private static final String remoteURL = "https://" + HOST + "/nexperience/perfectomobile/wd/hub/fast";
+    private static final String remoteURL = "https://" + HOST + "/nexperience/perfectomobile/wd/hub";
 
     private static RemoteWebDriver driver ;
     private static ReportiumClient reportiumClient ;

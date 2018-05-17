@@ -111,7 +111,11 @@ public class AXEImplementation {
 
         Map<String, Object> params = new HashMap<>();
         params.put("text", comment);
-        DriverFactory.getDriver().executeScript("mobile:comment", params);
+        try {
+            DriverFactory.getDriver().executeScript("mobile:comment", params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
